@@ -64,20 +64,20 @@ namespace
 
         hFile.close();
         hFile = CreateFileW(
-            sDest.c_str(),        // lpFileName
-            GENERIC_WRITE,        // dwDesiredAccess
-            NULL,                 // dwShareMode
-            NULL,                 // lpSecurityAttributes
-            OPEN_EXISTING,        // dwCreationDisposition
-            dwFlagsAndAttributes, // dwFlagsAndAttributes
-            NULL                  // hTemplateFile
+            sDest.c_str(),         // lpFileName
+            FILE_WRITE_ATTRIBUTES, // dwDesiredAccess
+            FILE_SHARE_READ,       // dwShareMode
+            NULL,                  // lpSecurityAttributes
+            OPEN_EXISTING,         // dwCreationDisposition
+            dwFlagsAndAttributes,  // dwFlagsAndAttributes
+            NULL                   // hTemplateFile
         );
         if (hFile.get() == INVALID_HANDLE_VALUE)
         {
             std::fprintf(
                 stderr,
                 "Failed to open \"%s\" for writing (error %d).",
-                PathToStr(sSource).c_str(),
+                PathToStr(sDest).c_str(),
                 GetLastError()
             );
             return false;
@@ -104,7 +104,7 @@ namespace
 
 bool CopyFileTimes(const std::wstring &sSource, const std::wstring &sDest)
 {
-    return CopyTimes(sSource, sDest, 0);
+    return CopyTimes(sSource, sDest, FILE_ATTRIBUTE_NORMAL);
 }
 
 bool CopyDirTimes(const std::wstring &sSource, const std::wstring &sDest)

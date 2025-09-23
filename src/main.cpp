@@ -70,13 +70,13 @@ int wmain(int argc, wchar_t* argv[])
                 else
                     ++iSucceededCount;
             }
-
-            std::printf(
-                "\n%llu unmatched, %llu succeeded, %llu failed.\n",
-                iUnmatchedCount,
-                iSucceededCount,
-                iFailedCount);
         }
+
+        std::printf(
+            "\n%llu unmatched, %llu succeeded, %llu failed.\n",
+            iUnmatchedCount,
+            iSucceededCount,
+            iFailedCount);
     }
 
 

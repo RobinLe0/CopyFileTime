@@ -16,7 +16,14 @@ class ScopedHandle final
 public: // methods
 
     ScopedHandle(HANDLE h) : m_h(h) {}
+    ScopedHandle(const ScopedHandle &other) = delete;
     ~ScopedHandle() { close(); }
+
+    ScopedHandle &operator=(HANDLE h)
+    {
+        close();
+        m_h = h;
+    }
 
     void close()
     {
