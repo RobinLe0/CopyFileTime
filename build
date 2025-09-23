@@ -1,0 +1,15 @@
+#!/bin/bash
+mkdir -p out
+cd out
+
+printf "╔═[Processing preset linux-x64-release...]═════════════════════════════════════╗\n"
+cmake .. --preset linux-x64-release >/dev/null
+cmake --build ./build/linux-x64-release >/dev/null
+
+printf "╠═[Processing preset linux-x86-release...]═════════════════════════════════════╣\n"
+cmake .. --preset linux-x86-release >/dev/null
+cmake --build ./build/linux-x86-release >/dev/null
+
+printf "╚══════════════════════════════════════════════════════════════════════════════╝\n"
+
+cd ..
