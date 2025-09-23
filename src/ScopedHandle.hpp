@@ -23,6 +23,7 @@ public: // methods
     {
         close();
         m_h = h;
+        return *this;
     }
 
     void close()

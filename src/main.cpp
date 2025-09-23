@@ -42,7 +42,7 @@ int wmain(int argc, wchar_t* argv[])
             const fs::path pathDest =
                 sDestRoot +
                 u8'\\' +
-                item.path().relative_path().u8string().substr(sSourceRoot.length() + 1);
+                item.path().relative_path().u8string().substr(sSourceRoot.length());
 
             if (item.is_regular_file())
             {
