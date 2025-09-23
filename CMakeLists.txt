@@ -11,7 +11,7 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release")  # Default to Release if not set
 endif()
 
-project ("unnamed-project")
+project ("CopyFileTime")
 
 
 # set the application output directory (Windows: .exe)
@@ -21,8 +21,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/
 # set the dynamic library output directory (Windows: .dll, Linux: .so)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/${ROBINLE_BINPATH}")
 
-add_executable (unnamed-project "src/main.cpp")
+add_executable (CopyFileTime "src/main.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET unnamed-project PROPERTY CXX_STANDARD 20)
+  set_property(TARGET CopyFileTime PROPERTY CXX_STANDARD 20)
 endif()

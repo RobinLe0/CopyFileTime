@@ -1,2 +1,2 @@
 @ECHO OFF
-bin\Release\win-x64\unnamed-project.exe %*
+bin\Release\win-x64\CopyFileTime.exe %*

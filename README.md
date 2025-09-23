@@ -1,6 +1,9 @@
-# RobinLe CMake Project Template
+# CopyFileTime – Batch copy the Created, Last Modified and Last Accessed Time
 
-This repo acts as a template for my CMake-based projects.
+This repo contains the (non-portable Windows) tool CopyFileTime that
+lets you copy the Created, Last Modified and Last Accessed times from
+the files in one directory to all the files of the same relative path in
+another directory.
 
 
 ## Directories
