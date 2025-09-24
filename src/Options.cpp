@@ -33,7 +33,7 @@ Options::Options(int iArgC, wchar_t *szArgV[])
         if (!fs::is_regular_file(pathDest))
         {
             m_sErrorMessage = std::format(
-                "Source path \"{}\" is a file, but destionation path \"{}\" is not.",
+                "Source path \"{}\" is a file, but destination path \"{}\" is not.",
                 pathSource.string(),
                 pathDest  .string()
             );
@@ -47,7 +47,7 @@ Options::Options(int iArgC, wchar_t *szArgV[])
         if (!fs::is_directory(pathDest))
         {
             m_sErrorMessage = std::format(
-                "Source path \"{}\" is a directory, but destionation path \"{}\" is not.",
+                "Source path \"{}\" is a directory, but destination path \"{}\" is not.",
                 pathSource.string(),
                 pathDest.string()
             );
