@@ -29,7 +29,7 @@ namespace
 
         ScopedHandle hFile = CreateFileW(
                 sSource.c_str(),      // lpFileName
-                GENERIC_READ,         // dwDesiredAccess
+                FILE_READ_ATTRIBUTES, // dwDesiredAccess
                 FILE_SHARE_READ,      // dwShareMode
                 NULL,                 // lpSecurityAttributes
                 OPEN_EXISTING,        // dwCreationDisposition
