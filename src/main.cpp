@@ -37,6 +37,32 @@ int wmain(int argc, wchar_t* argv[])
         uint64_t iSucceededCount = 0;
         uint64_t iFailedCount    = 0;
 
+        std::printf("Counting files... ");
+        uint64_t iTotalCount = 0;
+        for (const auto &item : fs::recursive_directory_iterator(opt.sourcePath()))
+        {
+            if (item.is_regular_file() || item.is_directory())
+                ++iTotalCount;
+        }
+        std::printf("Found %llu.\n", iTotalCount);
+        if (iTotalCount == 0)
+        {
+            std::printf("Exiting.\n");
+            return 0;
+        }
+
+
+        std::string sProgress =
+            "[                                 00 %                                 ]";
+        constexpr unsigned iMAX_PROGRESS      = 70;
+        constexpr unsigned iPERCENTAGE_OFFSET = 34;
+
+        unsigned iPrevPercent  = 0;
+        unsigned iPrevProgress = 0;
+
+        std::printf("Copying times...\n");
+        std::printf("%s", sProgress.c_str());
+        uint64_t iCurrentIdx = 0;
         for (const auto &item : fs::recursive_directory_iterator(opt.sourcePath()))
         {
             const fs::path pathDest =
@@ -47,28 +73,66 @@ int wmain(int argc, wchar_t* argv[])
             if (item.is_regular_file())
             {
                 if (!fs::is_regular_file(pathDest))
-                {
                     ++iUnmatchedCount;
-                    continue;
-                }
-
-                if (!CopyFileTimes(item.path().wstring(), pathDest.wstring()))
-                    ++iFailedCount;
                 else
-                    ++iSucceededCount;
+                {
+                    if (!CopyFileTimes(item.path().wstring(), pathDest.wstring()))
+                        ++iFailedCount;
+                    else
+                        ++iSucceededCount;
+                }
             }
             else if (item.is_directory())
             {
                 if (!fs::is_directory(pathDest))
-                {
                     ++iUnmatchedCount;
-                    continue;
+                else
+                {
+                    if (!CopyDirTimes(item.path().wstring(), pathDest.wstring()))
+                        ++iFailedCount;
+                    else
+                        ++iSucceededCount;
+                }
+            }
+            else
+                continue;
+
+
+
+            ++iCurrentIdx;
+
+            const unsigned iPercent  = 100 * ((float)iCurrentIdx / iTotalCount);
+
+            if (iPercent != iPrevPercent)
+            {
+                const unsigned iProgress = iMAX_PROGRESS * (iPercent / 100.0);
+
+                if (iProgress != iPrevProgress)
+                {
+                    for (size_t i = iPrevProgress; i < iProgress; ++i)
+                    {
+                        sProgress[1 + i] = '=';
+                    }
+
+                    iPrevProgress = iProgress;
                 }
 
-                if (!CopyDirTimes(item.path().wstring(), pathDest.wstring()))
-                    ++iFailedCount;
+                if (iPercent == 100)
+                {
+                    sProgress[iPERCENTAGE_OFFSET-1] = '1';
+                    sProgress[iPERCENTAGE_OFFSET  ] = '0';
+                    sProgress[iPERCENTAGE_OFFSET+1] = '0';
+                }
                 else
-                    ++iSucceededCount;
+                {
+                    sProgress[iPERCENTAGE_OFFSET  ] = '0' + (iPercent / 10);
+                    sProgress[iPERCENTAGE_OFFSET+1] = '0' + (iPercent % 10);
+                }
+
+                sProgress[iPERCENTAGE_OFFSET+2] = ' ';
+                sProgress[iPERCENTAGE_OFFSET+3] = '%';
+
+                std::printf("\r%s", sProgress.c_str());
             }
         }
 
@@ -76,7 +140,8 @@ int wmain(int argc, wchar_t* argv[])
             "\n%llu unmatched, %llu succeeded, %llu failed.\n",
             iUnmatchedCount,
             iSucceededCount,
-            iFailedCount);
+            iFailedCount
+        );
     }
 
 

@@ -40,7 +40,7 @@ namespace
         {
             std::fprintf(
                 stderr,
-                "Failed to open \"%s\" for reading (error %d).",
+                "\nFailed to open \"%s\" for reading (error %d).\n",
                 PathToStr(sSource).c_str(),
                 GetLastError()
             );
@@ -55,7 +55,7 @@ namespace
         {
             std::fprintf(
                 stderr,
-                "GetFileTime failed on \"%s\" (error %d).\n",
+                "\nGetFileTime failed on \"%s\" (error %d).\n",
                 PathToStr(sSource).c_str(),
                 GetLastError()
             );
@@ -76,7 +76,7 @@ namespace
         {
             std::fprintf(
                 stderr,
-                "Failed to open \"%s\" for writing (error %d).",
+                "\nFailed to open \"%s\" for writing (error %d).\n",
                 PathToStr(sDest).c_str(),
                 GetLastError()
             );
@@ -91,7 +91,7 @@ namespace
         {
             std::fprintf(
                 stderr,
-                "SetFileTime failed on \"%s\" (error %d).\n",
+                "\nSetFileTime failed on \"%s\" (error %d).\n",
                 PathToStr(sDest).c_str(),
                 GetLastError()
             );
