@@ -1,0 +1,34 @@
+﻿#include <winver.h>
+
+#ifndef NDEBUG
+#define VER_FLAGS (VS_FF_DEBUG | VS_FF_PRIVATEBUILD)
+#else
+#define VER_FLAGS 0
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     1,0,0,0
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEFLAGS       VER_FLAGS
+FILEOS          VOS__WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904B0"
+    BEGIN
+      VALUE "CompanyName",      "RobinLe"
+      VALUE "FileDescription",  "CopyFileTime"
+      VALUE "FileVersion",      "1.0.0.0"
+      VALUE "InternalName",     "CopyFileTime"
+      VALUE "LegalCopyright",   "© 2025 RobinLe"
+      VALUE "OriginalFilename", "CopyFileTime.exe"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x409, 1200
+  END
+END

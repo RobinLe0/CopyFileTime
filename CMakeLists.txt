@@ -21,7 +21,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/
 # set the dynamic library output directory (Windows: .dll, Linux: .so)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE}/${ROBINLE_BINPATH}")
 
-add_executable (CopyFileTime "src/main.cpp" "src/Options.cpp"  "src/CopyTimes.cpp")
+add_executable (CopyFileTime "src/main.cpp" "src/Options.cpp" "src/CopyTimes.cpp" "res/version.rc")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET CopyFileTime PROPERTY CXX_STANDARD 20)
