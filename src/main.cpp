@@ -108,11 +108,11 @@ int wmain(int argc, wchar_t* argv[])
                 {
                     ++iCurrentIdx;
 
-                    const unsigned iPercent  = 100 * ((float)iCurrentIdx / iTotalCount);
+                    const unsigned iPercent  = (unsigned)(100 * ((float)iCurrentIdx / iTotalCount));
 
                     if (iPercent != iPrevPercent)
                     {
-                        const unsigned iProgress = iMAX_PROGRESS * (iPercent / 100.0);
+                        const unsigned iProgress = (unsigned)(iMAX_PROGRESS * (iPercent / 100.0));
 
                         if (iProgress != iPrevProgress)
                         {
@@ -126,18 +126,18 @@ int wmain(int argc, wchar_t* argv[])
 
                         if (iPercent == 100)
                         {
-                            sProgress[iPERCENTAGE_OFFSET-1] = '1';
-                            sProgress[iPERCENTAGE_OFFSET] = '0';
-                            sProgress[iPERCENTAGE_OFFSET+1] = '0';
+                            sProgress[(size_t)iPERCENTAGE_OFFSET-1] = '1';
+                            sProgress[(size_t)iPERCENTAGE_OFFSET] = '0';
+                            sProgress[(size_t)iPERCENTAGE_OFFSET+1] = '0';
                         }
                         else
                         {
-                            sProgress[iPERCENTAGE_OFFSET] = '0' + (iPercent / 10);
-                            sProgress[iPERCENTAGE_OFFSET+1] = '0' + (iPercent % 10);
+                            sProgress[(size_t)iPERCENTAGE_OFFSET] = '0' + (iPercent / 10);
+                            sProgress[(size_t)iPERCENTAGE_OFFSET+1] = '0' + (iPercent % 10);
                         }
 
-                        sProgress[iPERCENTAGE_OFFSET+2] = ' ';
-                        sProgress[iPERCENTAGE_OFFSET+3] = '%';
+                        sProgress[(size_t)iPERCENTAGE_OFFSET+2] = ' ';
+                        sProgress[(size_t)iPERCENTAGE_OFFSET+3] = '%';
 
                         std::printf("\r%s", sProgress.c_str());
                     }

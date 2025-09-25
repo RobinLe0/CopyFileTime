@@ -25,7 +25,7 @@ namespace
             FILETIME oCreationTime;
             FILETIME oLastAccessTime;
             FILETIME oLastWriteTime;
-        } times;
+        } times = {};
 
         ScopedHandle hFile = CreateFileW(
                 sSource.c_str(),      // lpFileName
