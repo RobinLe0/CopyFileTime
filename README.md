@@ -5,6 +5,12 @@ lets you copy the Created, Last Modified and Last Accessed times from
 the files in one directory to all the files of the same relative path in
 another directory.
 
+## Portability
+
+Due to the use of Win32-API functions, this tool can currently only be
+compiled for Windows. However, LINUX-related scripts and configurations
+were kept for a possible future portability update.
+
 
 ## Directories
 
